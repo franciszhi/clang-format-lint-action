@@ -5,6 +5,10 @@ branding:
   icon: 'align-left'  
   color: 'green'
 inputs:
+  context:
+    description: 'Working directory to run clang-tidy'
+    required: false
+    default: ''
   source:
     description: 'Source folder to check formatting'
     required: false
@@ -32,6 +36,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    CLANG_FORMAT_LINT_CONTEXT: ${{ inputs.context }}
   args:
     - --clang-format-executable
     - /clang-format/clang-format${{ inputs.clangFormatVersion }}
