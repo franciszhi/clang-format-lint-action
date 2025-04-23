@@ -5,10 +5,6 @@ branding:
   icon: 'align-left'  
   color: 'green'
 inputs:
-  workingDirectory:
-    description: 'Working directory to run clang-format'
-    required: false
-    default: '.'
   source:
     description: 'Source folder to check formatting'
     required: false
@@ -36,7 +32,6 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  working-directory: ${{ inputs.workingDirectory }}
   args:
     - --clang-format-executable
     - /clang-format/clang-format${{ inputs.clangFormatVersion }}
