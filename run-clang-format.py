@@ -168,6 +168,7 @@ def run_clang_format_diff(args, file):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             universal_newlines=True,
+            cwd=args.context,
             **encoding_py3)
     except OSError as exc:
         raise DiffError(
@@ -314,6 +315,10 @@ def main():
         type=lambda x: bool(strtobool(x)),
         default=False,
         help='Just fix files (`clang-format -i`) instead of returning a diff')
+    parser.add_argument(
+        '--context',
+        help='Working directory to run clang-format',
+        default='')
 
     args = parser.parse_args()
 
